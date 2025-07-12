@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import "./buy-tickets.css";
+:root {
+  --primary-color: #3C0262;
+  --secondary-color: #ffffff;
+  --third-color: #3C0262;
+
+  --primary-font: "Poppins, sans-serif";
+  --secondary-font: "Montserrat, sans-serif";
+}
+.home-hero {
+  background-color: #3C0262;
+}
+body {
+  background-color: #3C0262;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins, sans-serif";
+}
+
+.home-hero h1 {
+  font-size: 3rem; /* 48px */
+}
+.dek{
+  display: none;
+}
+.mobi{
+  display:block
+}
+.home-hero button {
+  background-color: #ffc107;
+  border: none;
+  padding: 0.625rem 1.25rem; /* 10px 20px */
+  font-size: 1.2rem; /* 19.2px */
+  cursor: pointer;
+}
+
+.home-about-event {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.home-about-event-content {
+  background-color: #f9f9f9;
+  padding: 1.5rem; /* 50px 20px */
+  text-align: left;
+  margin: 2rem;
+  border-radius: 1rem;
+  flex: 3;
+}
+.home-about-event-content-right {
+  flex: 2;
+}
+.home-about-event-content-right-inner {
+  background-color: #f9f9f9;
+  padding: 1.25rem; /* 50px 20px */
+  text-align: left;
+  margin: 2rem;
+  border-radius: 1rem;
+}
+.sponsorImage{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-around;
+}
+.map-container {
+  width: 100%;
+  height: 19rem;
+  position: relative;
+  border-radius: 1rem;
+}
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+
+.home-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-box {
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.box-title {
+  font-size: 1.75em;
+  margin-bottom: 15px;
+  color: #333333;
+  text-align: center;
+  font-weight: bold;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 1.1em;
+  color: #555555;
+}
+
+.contact-item .icon {
+  margin-right: 12px;
+  color: #3C0262;
+}
+
+.contact-item a {
+  text-decoration: none;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.email .icon {
+  color: #3C0262;
+}
+
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .home-about-event{
+    flex-flow: column-reverse;
+  } 
+  .dek{
+    display: block;
+  }
+  .mobi{
+    display:none
+  }
+  .home-about-event-content {
+    margin: 1rem;
+  }
+  .home-about-event-content-right-inner {
+    margin: 1rem;
+  }
+}

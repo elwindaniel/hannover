@@ -1,0 +1,219 @@
+.body-admin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.white-box {
+  width: 20rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--secondary-color);
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+.buy-ticket-home {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: baseline;
+  flex-direction: row-reverse;
+  gap: 5rem;
+}
+/* Add this to your CSS file or within a <style jsx> tag */
+
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Adjust as needed to ensure it appears above other elements */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* Slide in from top */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.box-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  animation: slideInLeft 0.5s ease-in-out; /* Add slide-in animation */
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.box-card {
+  box-sizing: border-box;
+  padding: 0.8rem;
+  display: flex;
+  border: var(--primary-color) 1px solid;
+  border-radius: 0.5rem;
+  margin: 0.25rem;
+  width: 98%;
+  transition: transform 0.3s ease; /* Add transition for hover effect */
+}
+
+.box-card:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.box-card-btn {
+  box-sizing: border-box;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin: 0.25rem;
+  width: 98%;
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transitions for hover effect */
+}
+
+.box-card-btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: var(--primary-color) 1px solid;
+}
+
+.box-icon {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  animation: slideInRight 0.5s ease-in-out; /* Add slide-in animation */
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.box-text-area {
+  flex: 5;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+.box-sub-text {
+  font-size: 1rem;
+}
+
+.box-price-area {
+  flex: 1.5;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+.add-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Add transition for hover effect */
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 768px) {
+  .white-box {
+    width: 100%;
+    padding: 0.75rem;
+
+  }
+
+  .buy-ticket-home {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .box-title {
+    font-size: 1rem;
+  }
+
+  .box-card {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .box-card-btn {
+    width: 100%;
+  }
+
+  .box-icon, .box-text-area, .box-price-area {
+    flex: unset;
+    width: 100%;
+  }
+
+  .box-price-area {
+    justify-content: center;
+  }
+
+  .add-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .white-box {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 14rem;
+  }
+
+  .buy-ticket-home {
+    gap: 1rem;
+  }
+
+  .box-title {
+    font-size: 0.875rem;
+  }
+
+  .box-card {
+    padding: 0.5rem;
+    margin: 0.125rem;
+  }
+
+  .box-card-btn {
+    padding: 0.5rem;
+  }
+
+  .box-sub-text {
+    font-size: 0.875rem;
+  }
+
+  .box-price-area {
+    font-size: 0.875rem;
+  }
+
+  .add-btn {
+    margin: 0;
+  }
+}
