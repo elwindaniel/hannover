@@ -117,8 +117,8 @@ function BuyTickets() {
         </div>
       ) : (
         <div className="white-box">
-        <div className="box-title">Sorry we are closed</div>
-        {/* {ticketList.length > 0 &&
+        {/* <div className="box-title">Sorry we are closed</div> */}
+        {ticketList.length > 0 &&
           ticketList.map((ticket, index) => (
             <div key={index} className="box-card">
               <div className="box-icon">
@@ -139,8 +139,8 @@ function BuyTickets() {
                 <FaTimesCircle size={20} />
               </div>
             </div>
-          ))} */}
-        {/* {(ticketList.length === 0 || showForm) && (
+          ))}
+        {(ticketList.length === 0 || showForm) && (
           <div>
             <input
               className="box-card"
@@ -160,13 +160,13 @@ function BuyTickets() {
               Add
             </button>
           </div>
-        )} */}
-        {/* {ticketList.length > 0 && !showForm && (
+        )}
+        {ticketList.length > 0 && !showForm && (
           <div className="add-btn" onClick={() => setShowForm(true)}>
             <IoIosAddCircle size={25} />
           </div>
-        )} */}
-        {/* <div style={{ padding: "8px" }} />
+        )}
+        <div style={{ padding: "8px" }} />
         <div className="box-sub-text">Total Price: € {totalPrice}</div>
         {isLoading ? (
           <button className="box-card-btn">Loading...</button>
@@ -174,7 +174,7 @@ function BuyTickets() {
           <button className="box-card-btn" onClick={handleBuy}>
             Proceed
           </button>
-        )} */}
+        )}
       </div>
       )}
       <div>
