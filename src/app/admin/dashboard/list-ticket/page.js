@@ -1,122 +1,95 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import '@/styles/tickets.css'; // reuse the same styles
-import {
-  getAllPriceGroups,
-  createPriceGroup,
-  updatePriceGroup,
-  deletePriceGroup,
-} from '@/services/price';
+'use client'
+import React, { useState, useEffect } from 'react';
+import '@/styles/tickets.css';
+import { adminTickets, deleteTicketByTicketNo } from '@/services/auth';
 
-const defaultForm = { age: '', price: '', group: '' };
-
-function PriceGroups() {
+function Tickets() {
+  const [openList, setOpenList] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState(defaultForm);
-  const [editingId, setEditingId] = useState(null);
+
+  const handleToggle = (id) => {
+    setOpenList(openList === id ? null : id);
+  };
 
   useEffect(() => {
-    fetchPrices();
-  }, []);
+    fetchTicket();
+  }, [loading]);
 
-  const fetchPrices = async () => {
-    setLoading(true);
+  const fetchTicket = async () => {
     try {
-      const res = await getAllPriceGroups();
-      setData(res.data.data);
-    } catch (err) {
-      console.error('Error fetching price groups:', err);
-    }
-    setLoading(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (editingId) {
-        await updatePriceGroup(editingId, form);
-      } else {
-        await createPriceGroup(form);
+      const response = await adminTickets();
+      if (response) {
+        setData(response.data.data);
+        setLoading(false);
       }
-      setForm(defaultForm);
-      setEditingId(null);
-      fetchPrices();
-    } catch (err) {
-      console.error('Error saving price group:', err);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error fetching tickets:", error);
     }
   };
 
-  const handleEdit = (item) => {
-    setForm({ age: item.age, price: item.price, group: item.group });
-    setEditingId(item._id);
-  };
+  if (loading) {
+    return (
+      <div className="loader-container">
+        {/* <div className="loader">Loading...</div> */}
+      </div>
+    );
+  }
 
-  const handleDelete = async (id) => {
-    if (confirm('Are you sure you want to delete this group?')) {
+  const DeleteTicket = async (ticket) => {
+    if (window.confirm(`Are you sure you want to delete ticket number ${ticket.ticketNo}?  status : ${ticket.status}`)) {
+      setLoading(true);
       try {
-        await deletePriceGroup(id);
-        fetchPrices();
-      } catch (err) {
-        console.error('Delete failed:', err);
+        const deleteData = await deleteTicketByTicketNo(ticket.ticketNo);
+        setLoading(false);
+        // Optionally, you could trigger a refresh of the ticket list after deletion
+        fetchTicket();
+      } catch (error) {
+        setLoading(false);
+        console.error("Error deleting ticket:", error);
       }
     }
-  };
+  }
 
   return (
     <div className="tickets-container">
-      <h1 style={{ color: '#fff' }}>Price Groups</h1>
-
-      <form onSubmit={handleSubmit} className="price-form">
-        <input
-          type="number"
-          placeholder="Age"
-          value={form.age}
-          onChange={(e) => setForm({ ...form, age: e.target.value })}
-          required
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={form.price}
-          onChange={(e) => setForm({ ...form, price: e.target.value })}
-          required
-        />
-        <select
-          value={form.group}
-          onChange={(e) => setForm({ ...form, group: e.target.value })}
-          required
-        >
-          <option value="">Select Group</option>
-          <option value="child">Child</option>
-          <option value="adult">Adult</option>
-          <option value="senior">Senior</option>
-        </select>
-        <button type="submit">{editingId ? 'Update' : 'Create'}</button>
-        {editingId && <button onClick={() => { setForm(defaultForm); setEditingId(null); }}>Cancel</button>}
-      </form>
-
+      <h1 style={{ color: "#fff" }}>Tickets</h1>
       <table>
         <thead>
           <tr>
             <th>Sl.No</th>
-            <th>Group</th>
-            <th>Age</th>
-            <th>Price</th>
+            <th>Ticket No</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>No</th>
+            <th>Address</th>
+            <th>List</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((group, index) => (
-            <tr key={group._id}>
+          {data.map((ticket, index) => (
+            <tr key={ticket._id}>
               <td>{index + 1}</td>
-              <td>{group.group}</td>
-              <td>{group.age}</td>
-              <td>{group.price}</td>
+              <td>{ticket.ticketNo}</td>
+              <td>{ticket.status}</td>
+              <td>{ticket.total}</td>
+              <td>{ticket.list.length}</td>
+              <td>{`${ticket.address.addressLine}, ${ticket.address.street}, ${ticket.address.postcode}`}</td>
               <td>
-                <button onClick={() => handleEdit(group)}>Edit</button>
-                <button onClick={() => handleDelete(group._id)}>Del</button>
+                <button onClick={() => handleToggle(ticket._id)} className="toggle-button">
+                  {openList === ticket._id ? 'Hide List' : 'Show List'}
+                </button>
+                {openList === ticket._id && (
+                  <ul className="ticket-list">
+                    {ticket.list.map(item => (
+                      <li key={item._id}>{`${item.name} (Age: ${item.age}, Price: ${item.price})`}</li>
+                    ))}
+                  </ul>
+                )}
               </td>
+              <td><button onClick={() => DeleteTicket(ticket)}>Del</button></td>
             </tr>
           ))}
         </tbody>
@@ -125,4 +98,4 @@ function PriceGroups() {
   );
 }
 
-export default PriceGroups;
+export default Tickets;

@@ -163,7 +163,7 @@ function BuyTickets() {
         )}
         {ticketList.length > 0 && !showForm && (
           <div className="add-btn" onClick={() => setShowForm(true)}>
-            <IoIosAddCircle size={25} />
+            <IoIosAddCircle size={25} /> Add
           </div>
         )}
         <div style={{ padding: "8px" }} />
