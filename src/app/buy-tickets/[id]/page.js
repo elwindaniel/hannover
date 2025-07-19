@@ -3,10 +3,14 @@ import React, { useState, useEffect } from "react";
 import { FaChild, FaTimesCircle } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
-import { createEventUserCart, getAllTicketByUserId, getEventPricing } from "@/services/eventUser";
+import {
+  createEventUserCart,
+  getAllTicketByUserId,
+  getEventPricing,
+} from "@/services/eventUser";
 import { useParams, useRouter } from "next/navigation";
 import { setSessionStorage } from "@/utils/sessionStorageUtil";
-import { Circles } from 'react-loader-spinner';
+import { Circles } from "react-loader-spinner";
 
 function BuyTickets() {
   const params = useParams();
@@ -117,65 +121,67 @@ function BuyTickets() {
         </div>
       ) : (
         <div className="white-box">
-        {/* <div className="box-title">Sorry we are closed</div> */}
-        {ticketList.length > 0 &&
-          ticketList.map((ticket, index) => (
-            <div key={index} className="box-card">
-              <div className="box-icon">
-                {ticket.age < 12 ? <FaChild /> : <BsFillPersonFill />}
-              </div>
-              <div className="box-text-area">
-                <div className="box-sub-text">
-                  Name: <b>{ticket.name}</b>
+          {/* <div className="box-title">Sorry we are closed</div> */}
+          {ticketList.length > 0 &&
+            ticketList.map((ticket, index) => (
+              <div key={index} className="box-card">
+                <div className="box-icon">
+                  {ticket.age < 12 ? <FaChild /> : <BsFillPersonFill />}
                 </div>
-                <div className="box-sub-text">
-                  Age: <b>{ticket.age}</b>
+                <div className="box-text-area">
+                  <div className="box-sub-text">
+                    Name: <b>{ticket.name}</b>
+                  </div>
+                  <div className="box-sub-text">
+                    Age: <b>{ticket.age}</b>
+                  </div>
+                </div>
+                <div className="box-price-area">
+                  <div className="box-sub-text">€ {ticket.price}</div>
+                </div>
+                <div className="box-icon" onClick={() => removeTicket(index)}>
+                  <FaTimesCircle size={20} />
                 </div>
               </div>
-              <div className="box-price-area">
-                <div className="box-sub-text">€ {ticket.price}</div>
-              </div>
-              <div className="box-icon" onClick={() => removeTicket(index)}>
-                <FaTimesCircle size={20} />
-              </div>
+            ))}
+          {(ticketList.length === 0 || showForm) && (
+            <div>
+              <input
+                className="box-card"
+                placeholder="Full Name"
+                id="name"
+                value={ticketForm.name}
+                onChange={ticketInfoChange}
+              />
+              <input
+                className="box-card"
+                placeholder="Age"
+                id="age"
+                value={ticketForm.age}
+                onChange={ticketInfoChange}
+              />
+              <button className="box-card-btn" onClick={addTicket}>
+                Add
+              </button>
             </div>
-          ))}
-        {(ticketList.length === 0 || showForm) && (
-          <div>
-            <input
-              className="box-card"
-              placeholder="Full Name"
-              id="name"
-              value={ticketForm.name}
-              onChange={ticketInfoChange}
-            />
-            <input
-              className="box-card"
-              placeholder="Age"
-              id="age"
-              value={ticketForm.age}
-              onChange={ticketInfoChange}
-            />
-            <button className="box-card-btn" onClick={addTicket}>
-              Add
+          )}
+          {ticketList.length > 0 && !showForm && (
+            <div className="add-btn" onClick={() => setShowForm(true)}>
+              <IoIosAddCircle size={25} /> Add
+            </div>
+          )}
+          <div style={{ padding: "8px" }} />
+          <div className="box-sub-text">Total Price: € {totalPrice}</div>
+          {isLoading ? (
+            <button className="box-card-btn">Loading...</button>
+          ) : (
+            <button className="box-card-btn" onClick={handleBuy}>
+              Proceed
             </button>
-          </div>
-        )}
-        {ticketList.length > 0 && !showForm && (
-          <div className="add-btn" onClick={() => setShowForm(true)}>
-            <IoIosAddCircle size={25} /> Add
-          </div>
-        )}
-        <div style={{ padding: "8px" }} />
-        <div className="box-sub-text">Total Price: € {totalPrice}</div>
-        {isLoading ? (
-          <button className="box-card-btn">Loading...</button>
-        ) : (
-          <button className="box-card-btn" onClick={handleBuy}>
-            Proceed
-          </button>
-        )}
-      </div>
+          )}
+
+          <p>Please note that this purchase is non‑refundable.</p>
+        </div>
       )}
       <div>
         <div style={{ height: "16px" }}></div>
@@ -184,12 +190,17 @@ function BuyTickets() {
         </div>
         {tickets?.length > 0 &&
           tickets.map((ticket, index) => (
-            <div className="white-box" style={{ marginTop: "16px" }} key={index}>
+            <div
+              className="white-box"
+              style={{ marginTop: "16px" }}
+              key={index}
+            >
               <div>
                 Ticket no : <b>{ticket?.ticketNo}</b>
               </div>
               <div>
-                Status: {ticket?.status === "paid" ? "confirmed" : "payment is due"}
+                Status:{" "}
+                {ticket?.status === "paid" ? "confirmed" : "payment is due"}
               </div>
               {ticket?.list?.length > 0 &&
                 ticket.list?.map((tkt, idx) => (
