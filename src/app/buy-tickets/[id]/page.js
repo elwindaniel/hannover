@@ -222,6 +222,7 @@ function BuyTickets() {
                     </div>
                   </div>
                 ))}
+              <p>Please note that this purchase is non‑refundable.</p>
             </div>
           ))}
       </div>
