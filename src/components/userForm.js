@@ -123,6 +123,7 @@ function UserForm() {
           >
             Book Now
           </button>
+          <p>Please note that this purchase is non‑refundable.</p>
         </>
       ) : (
         <div>Loading</div>
