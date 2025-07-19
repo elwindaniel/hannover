@@ -8,7 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useParams } from "next/navigation";
 
 export default function PaymentSuccess() {
-    const params = useParams();
+  const params = useParams();
   const [ticketPriceList, setTicketPriceList] = useState();
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -17,19 +17,17 @@ export default function PaymentSuccess() {
     fetchTicket(userId);
   }, []);
 
-
   const fetchTicket = async (id) => {
     try {
       const response = await getTicketByUserId(params.id);
       if (response) {
-        console.log(response.data.data)
+        console.log(response.data.data);
         setTicketPriceList(response.data.data[0]);
       }
     } catch (error) {
       console.error("Error fetching event pricing:", error);
     }
   };
-
 
   return (
     <div className="white-box">
@@ -48,12 +46,13 @@ export default function PaymentSuccess() {
               <div className="box-sub-text">
                 Age: <b>{ticket.age}</b>
                 {ticket.age < 7 && <p>please bring proof of age</p>}
-
               </div>
             </div>
           </div>
         ))}
-      <div style={{ height: "16px" }}></div>
+      <div style={{ height: "16px" }}>
+        <p>Please note that this purchase is non‑refundable.</p>
+      </div>
     </div>
   );
 }
