@@ -123,8 +123,7 @@ function UserForm() {
           >
             Book Now
           </button>
-          <p style={{fontSize:"8px"}}>Please note that this purchase is non‑refundable.</p>
-        </>
+<p style={{fontSize:"9px"}}>Please note that this purchase is non‑refundable.</p>        </>
       ) : (
         <div>Loading</div>
       )}
