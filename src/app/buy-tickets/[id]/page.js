@@ -180,7 +180,7 @@ function BuyTickets() {
             </button>
           )}
 
-          <p>Please note that this purchase is non‑refundable.</p>
+          <p style={{fontSize:"8px"}}>Please note that this purchase is non‑refundable.</p>
         </div>
       )}
       <div>
@@ -222,7 +222,7 @@ function BuyTickets() {
                     </div>
                   </div>
                 ))}
-              <p>Please note that this purchase is non‑refundable.</p>
+              <p style={{fontSize:"8px"}}>Please note that this purchase is non‑refundable.</p>
             </div>
           ))}
       </div>

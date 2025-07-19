@@ -51,7 +51,7 @@ export default function PaymentSuccess() {
           </div>
         ))}
       <div style={{ height: "16px" }}>
-        <p>Please note that this purchase is non‑refundable.</p>
+        <p style={{fontSize:"8px"}}>Please note that this purchase is non‑refundable.</p>
       </div>
     </div>
   );
