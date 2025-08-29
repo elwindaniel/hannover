@@ -63,8 +63,7 @@ export default function Home() {
         </div>
         <div className="home-about-event-content-right">
           <div className="home-about-event-content-right-inner">
-          <h3>Tickets Sold out!</h3>
-            {/* <UserForm /> */}
+            <UserForm />
           </div>
           <div className="home-about-event-content-right-inner">
             <Image
